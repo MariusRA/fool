@@ -1,0 +1,1 @@
+Here, sources of documentation which helped in developping the app (pdfs, docs, yt videos, etc). 
