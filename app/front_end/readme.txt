@@ -1,1 +1,1 @@
-Here, the front end applications.
+Here, the front-end apps.

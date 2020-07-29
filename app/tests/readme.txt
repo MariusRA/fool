@@ -1,1 +1,1 @@
-Here, the test and their description.
+Here, some tests for the app.
