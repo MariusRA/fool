@@ -1,0 +1,12 @@
+Some tests for the app:
+
+-When the user opens the app, the Login activity should appear
+-If he doesn't have an account, the user should go to "Need to register?" link and the Register activity should appear
+-If the username or password introduced by the user are incorrect, the Login activitu should reappear until the user fills the correct credentials 
+-After creating an account, the user should be redirected to the Login activity
+-After the login, the Menu should appear to the user
+-When the user presses Start in the New Session activity, a timer should appear
+-When the user presses Stop or Pause button in the New Session activity, the timer should stop
+-If the user presses Pause button, the timer should stop until the user presses the Resume button
+-If the user presses Stop button, the timer should stop and save its value for that day
+-The user should be able to change the Name, Password or the Email
