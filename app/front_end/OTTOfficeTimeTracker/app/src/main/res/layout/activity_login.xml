@@ -15,7 +15,7 @@
         android:layout_marginEnd="16dp"
         android:ems="10"
         android:inputType="textPersonName"
-        android:text="@string/edit_name"
+        android:hint="@string/edit_name"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -29,7 +29,7 @@
         android:layout_marginEnd="16dp"
         android:ems="10"
         android:inputType="textPassword"
-        android:text="@string/edit_pass"
+        android:hint="@string/edit_pass"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/nameLog" />
