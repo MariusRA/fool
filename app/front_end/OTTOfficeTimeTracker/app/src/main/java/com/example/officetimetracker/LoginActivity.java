@@ -3,7 +3,6 @@ package com.example.officetimetracker;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -15,7 +14,7 @@ public class LoginActivity extends AppCompatActivity {
     EditText username, pass;
     Button login;
 
-    SharedPreferences preferences;
+    DatabaseHelper mydbh=new DatabaseHelper(this);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,28 +25,22 @@ public class LoginActivity extends AppCompatActivity {
         pass=findViewById(R.id.passLog);
         login=findViewById(R.id.btnLog);
 
-        preferences=getSharedPreferences("UserInfo",0);
-
         login.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
-                String usernameValue=username.getText().toString();
-                String passwordValue=pass.getText().toString();
-
-                String registeredUsername=preferences.getString("Username","");
-                String registeredPassword=preferences.getString("Password","");
-
-                if(usernameValue.equals(registeredUsername) && passwordValue.equals(registeredPassword)){
-                    Intent intent=new Intent(LoginActivity.this,MainActivity.class);
-                    startActivity(intent);
-                }
-                else{
-                    Toast.makeText(LoginActivity.this,"Invalid Username or Password",Toast.LENGTH_SHORT).show();
+            public void onClick(View v) {
+                Boolean usernamePassCheck=mydbh.checkUsernamePass(username.getText().toString(),pass.getText().toString());
+                if(usernamePassCheck) {
+                    if (usernameValidation() && passValidation()) {
+                        Toast.makeText(getApplicationContext(), "Login Successfull!", Toast.LENGTH_LONG).show();
+                        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                        startActivity(intent);
+                    }
+                }else{
+                    Toast.makeText(getApplicationContext(), "Incorrect Username or Password!", Toast.LENGTH_LONG).show();
                 }
             }
         });
 
-        //Intent intent =getIntent();
     }
 
     public void onClickNeedReg(View view){
@@ -55,4 +48,27 @@ public class LoginActivity extends AppCompatActivity {
         Intent intent =new Intent(this, RegisterActivity.class);
         startActivity(intent);
     }
+
+    private boolean usernameValidation() {
+
+        String usernameInput = username.getText().toString().trim();
+        if (usernameInput.isEmpty()) {
+            username.setError("Please fill out this field");
+            return false;
+        }
+        username.setError(null);
+        return true;
+    }
+
+    private boolean passValidation() {
+
+        String passInput = pass.getText().toString().trim();
+        if (passInput.isEmpty()) {
+            pass.setError("Please fill out this field");
+            return false;
+        }
+        pass.setError(null);
+        return true;
+    }
+
 }

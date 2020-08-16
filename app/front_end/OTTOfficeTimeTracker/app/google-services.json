@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "86659464429",
+    "firebase_url": "https://officetimetracker.firebaseio.com",
+    "project_id": "officetimetracker",
+    "storage_bucket": "officetimetracker.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:86659464429:android:381539cd49e1ebb39520e4",
+        "android_client_info": {
+          "package_name": "com.example.officetimetracker"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "86659464429-kqcqqg8o4kjmh9b9ceg4s4ps2k7uu5r8.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.officetimetracker",
+            "certificate_hash": "74bebb7dc91f47d816c8cff858a467228eb073e2"
+          }
+        },
+        {
+          "client_id": "86659464429-iru9p29raigan8jm0hvumtudvj77vqkp.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB6Ky6ONyp0jfZbTjsIpbcGyQw6rBBDtso"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "86659464429-iru9p29raigan8jm0hvumtudvj77vqkp.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
