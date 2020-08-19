@@ -7,4 +7,9 @@
     <string name="btn_login">Login</string>
     <string name="label_register">Need to register?</string>
     <string name="label_login">Already registered? Log in here</string>
+    <string name="btnProfile">Profile</string>
+    <string name="btnProjects">Projects</string>
+    <string name="btnReports">Reports</string>
+    <string name="btnSignOut">Sign Out</string>
+    <string name="btnNewSession">New Session</string>
 </resources>
