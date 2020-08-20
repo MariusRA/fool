@@ -17,7 +17,7 @@ public class RegisterActivity extends AppCompatActivity {
     EditText email, username, pass;
     Button register;
 
-    DatabaseHelper mydbh=new DatabaseHelper(this);
+    DatabaseHelper mydbh;
 
     //regular expression/regex for a usual email address
     public static final Pattern EMAIL_ADDRESS = Pattern.compile(
@@ -41,12 +41,13 @@ public class RegisterActivity extends AppCompatActivity {
         pass = findViewById(R.id.passReg);
         register = findViewById(R.id.btnSubmitReg);
 
+        mydbh = new DatabaseHelper(this);
         register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                if(usernameValidation() && emailValidation() && passValidation()) {
-                    Boolean mailCheck=mydbh.checkEmail(email.getText().toString());
+                if (usernameValidation() && emailValidation() && passValidation()) {
+                    Boolean mailCheck = mydbh.checkEmail(email.getText().toString());
                     if (mailCheck) {
                         boolean isInserted = mydbh.insert(username.getText().toString(), email.getText().toString(), pass.getText().toString());
                         if (isInserted) {
@@ -56,7 +57,7 @@ public class RegisterActivity extends AppCompatActivity {
                         } else {
                             Toast.makeText(getApplicationContext(), "Problem at registration!", Toast.LENGTH_LONG).show();
                         }
-                    }else{
+                    } else {
                         Toast.makeText(getApplicationContext(), "Email already registered!", Toast.LENGTH_LONG).show();
                     }
                 }
