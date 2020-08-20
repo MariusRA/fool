@@ -14,38 +14,40 @@ public class LoginActivity extends AppCompatActivity {
     EditText username, pass;
     Button login;
 
-    DatabaseHelper mydbh=new DatabaseHelper(this);
+    DatabaseHelper mydbh;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        username=findViewById(R.id.nameLog);
-        pass=findViewById(R.id.passLog);
-        login=findViewById(R.id.btnLog);
+        username = findViewById(R.id.nameLog);
+        pass = findViewById(R.id.passLog);
+        login = findViewById(R.id.btnLog);
+
+        mydbh = new DatabaseHelper(this);
 
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Boolean usernamePassCheck=mydbh.checkUsernamePass(username.getText().toString(),pass.getText().toString());
-                if(usernamePassCheck) {
-                    if (usernameValidation() && passValidation()) {
+                if (usernameValidation() && passValidation()) {
+                    Boolean usernamePassCheck = mydbh.checkUsernamePass(username.getText().toString(), pass.getText().toString());
+                    if (usernamePassCheck) {
                         Toast.makeText(getApplicationContext(), "Login Successfull!", Toast.LENGTH_LONG).show();
                         Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                         startActivity(intent);
+                    } else {
+                        Toast.makeText(getApplicationContext(), "Invalid Username or Password!", Toast.LENGTH_LONG).show();
                     }
-                }else{
-                    Toast.makeText(getApplicationContext(), "Incorrect Username or Password!", Toast.LENGTH_LONG).show();
                 }
             }
         });
 
     }
 
-    public void onClickNeedReg(View view){
+    public void onClickNeedReg(View view) {
 
-        Intent intent =new Intent(this, RegisterActivity.class);
+        Intent intent = new Intent(this, RegisterActivity.class);
         startActivity(intent);
     }
 
