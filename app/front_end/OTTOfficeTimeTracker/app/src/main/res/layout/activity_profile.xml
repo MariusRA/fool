@@ -6,4 +6,52 @@
     android:layout_height="match_parent"
     tools:context=".ProfileActivity">
 
+    <Button
+        android:id="@+id/btnSignOut"
+        android:layout_width="160dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="196dp"
+        android:text="@string/btnSignOut"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/profile"
+        android:layout_width="96dp"
+        android:layout_height="96dp"
+        android:layout_marginTop="100dp"
+        android:src="@drawable/profile"
+        app:civ_border_color="#FF000000"
+        app:civ_border_width="2dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tName"
+        android:layout_width="0dp"
+        android:layout_height="45dp"
+        android:layout_marginTop="84dp"
+        android:layout_marginBottom="45dp"
+        android:text="TextView"
+        app:layout_constraintBottom_toTopOf="@+id/tEmail"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/profile"
+        app:layout_constraintVertical_bias="0.865" />
+
+    <TextView
+        android:id="@+id/tEmail"
+        android:layout_width="0dp"
+        android:layout_height="45dp"
+        android:layout_marginTop="38dp"
+        android:layout_marginBottom="124dp"
+        android:text="TextView"
+        app:layout_constraintBottom_toTopOf="@+id/btnSignOut"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tName" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

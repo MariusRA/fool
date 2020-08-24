@@ -12,10 +12,18 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ProjectsActivity"></activity>
-        <activity android:name=".ReportsActivity" />
-        <activity android:name=".NewSessionActivity" />
-        <activity android:name=".ProfileActivity" />
+        <activity
+            android:name=".ProjectsActivity"
+            android:parentActivityName=".MainActivity" />
+        <activity
+            android:name=".ReportsActivity"
+            android:parentActivityName=".MainActivity" />
+        <activity
+            android:name=".NewSessionActivity"
+            android:parentActivityName=".MainActivity" />
+        <activity
+            android:name=".ProfileActivity"
+            android:parentActivityName=".MainActivity" />
         <activity android:name=".MainActivity" />
         <activity
             android:name=".RegisterActivity"
