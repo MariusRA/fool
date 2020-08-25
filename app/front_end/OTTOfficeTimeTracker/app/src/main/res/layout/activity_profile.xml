@@ -10,11 +10,14 @@
         android:id="@+id/btnSignOut"
         android:layout_width="160dp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="196dp"
+        android:layout_marginTop="16dp"
         android:text="@string/btnSignOut"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnUpdateProfile"
+        app:layout_constraintVertical_bias="0.0" />
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/profile"
@@ -28,30 +31,104 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <Button
+        android:id="@+id/btnUpdateProfile"
+        android:layout_width="160dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:text="@string/btnUpdateProfile"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/etOldPassword" />
+
+    <EditText
+        android:id="@+id/etName"
+        android:layout_width="267dp"
+        android:layout_height="45dp"
+        android:layout_marginEnd="28dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="Name"
+        app:layout_constraintBaseline_toBaselineOf="@+id/tName"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <EditText
+        android:id="@+id/etEmail"
+        android:layout_width="267dp"
+        android:layout_height="45dp"
+        android:layout_marginEnd="28dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="Name"
+        app:layout_constraintBaseline_toBaselineOf="@+id/tEmail"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <EditText
+        android:id="@+id/etPassword"
+        android:layout_width="267dp"
+        android:layout_height="45dp"
+        android:layout_marginEnd="28dp"
+        android:ems="10"
+        android:inputType="textPassword"
+        app:layout_constraintBaseline_toBaselineOf="@+id/tPassword"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <EditText
+        android:id="@+id/etOldPassword"
+        android:layout_width="267dp"
+        android:layout_height="45dp"
+        android:layout_marginEnd="28dp"
+        android:ems="10"
+        android:hint="@string/oldPassword"
+        android:inputType="textPassword"
+        app:layout_constraintBaseline_toBaselineOf="@+id/tOldPassword"
+        app:layout_constraintEnd_toEndOf="parent" />
+
     <TextView
         android:id="@+id/tName"
-        android:layout_width="0dp"
-        android:layout_height="45dp"
-        android:layout_marginTop="84dp"
-        android:layout_marginBottom="45dp"
-        android:text="TextView"
-        app:layout_constraintBottom_toTopOf="@+id/tEmail"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="252dp"
+        android:text="Name:"
+        app:layout_constraintEnd_toStartOf="@+id/etName"
+        app:layout_constraintHorizontal_bias="0.213"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/profile"
-        app:layout_constraintVertical_bias="0.865" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/tEmail"
-        android:layout_width="0dp"
-        android:layout_height="45dp"
-        android:layout_marginTop="38dp"
-        android:layout_marginBottom="124dp"
-        android:text="TextView"
-        app:layout_constraintBottom_toTopOf="@+id/btnSignOut"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:text="Email:"
+        app:layout_constraintEnd_toStartOf="@+id/etEmail"
+        app:layout_constraintHorizontal_bias="0.217"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tName" />
+
+    <TextView
+        android:id="@+id/tPassword"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:text="Password:"
+        app:layout_constraintEnd_toStartOf="@+id/etPassword"
+        app:layout_constraintHorizontal_bias="0.32"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tEmail" />
+
+    <TextView
+        android:id="@+id/tOldPassword"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="26dp"
+        android:text="Password:"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/etOldPassword"
+        app:layout_constraintHorizontal_bias="0.34"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tPassword"
+        app:layout_constraintVertical_bias="0.057" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -9,10 +9,12 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+
 public class LoginActivity extends AppCompatActivity {
 
     EditText username, pass;
     Button login;
+    User currentUser;
 
     DatabaseHelper mydbh;
 
@@ -31,12 +33,14 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (usernameValidation() && passValidation()) {
-                    Boolean usernamePassCheck = mydbh.checkUsernamePass(username.getText().toString(), pass.getText().toString());
+                    currentUser=User.getInstance(username.getText().toString(),pass.getText().toString());
+                    Boolean usernamePassCheck = mydbh.checkUsernamePass(currentUser.getUsername(), currentUser.getPassword());
                     if (usernamePassCheck) {
                         Toast.makeText(getApplicationContext(), "Login Successfull!", Toast.LENGTH_LONG).show();
                         Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                         startActivity(intent);
                     } else {
+                        User.releaseInstance();
                         Toast.makeText(getApplicationContext(), "Invalid Username or Password!", Toast.LENGTH_LONG).show();
                     }
                 }

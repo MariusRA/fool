@@ -12,4 +12,14 @@
     <string name="btnReports">Reports</string>
     <string name="btnSignOut">Sign Out</string>
     <string name="btnNewSession">New Session</string>
+
+    <string name="newUsername">New Username</string>
+    <string name="newEmail">New Email</string>
+    <string name="newPassword">New Password</string>
+    <string name="oldPassword">Introduce the old password to confirm</string>
+    <string name="btnUpdate">Confirm</string>
+    <string name="btnUpdateProfile">Update Profile</string>
+    <string name="btnAddProject">Add Project</string>
+    <string name="projectName">Project</string>
+    <string name="projectDescription">Project Description</string>
 </resources>
