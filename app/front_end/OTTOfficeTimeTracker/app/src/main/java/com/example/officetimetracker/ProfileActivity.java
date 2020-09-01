@@ -4,6 +4,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
@@ -16,7 +18,6 @@ public class ProfileActivity extends AppCompatActivity {
 
     Button signOut, updateProfile;
     TextView name, email, password, oldPassword;
-    String passwordValue;
 
     User currentUser;
     DatabaseHelper mydbh;
@@ -45,8 +46,59 @@ public class ProfileActivity extends AppCompatActivity {
         password = findViewById(R.id.etPassword);
         oldPassword = findViewById(R.id.etOldPassword);
 
-        passwordValue = oldPassword.getText().toString();
+       /* name.addTextChangedListener(profileModifiedWatcher);
+        email.addTextChangedListener(profileModifiedWatcher);
+        password.addTextChangedListener(profileModifiedWatcher);
+        oldPassword.addTextChangedListener(profileModifiedWatcher);*/
 
+
+        mydbh = new DatabaseHelper(getApplicationContext());
+        currentUser = User.getInstance(null, null);
+
+        updateProfile.setEnabled(false);
+
+        if (mydbh.loadProfile(currentUser)) {
+            name.setText(currentUser.getUsername());
+            email.setText(currentUser.getEmail());
+            password.setText(currentUser.getPassword());
+            oldPassword.setText("password");
+        } else {
+            Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+            User.releaseInstance();
+            startActivity(intent);
+
+        }
+
+        User.releaseInstance();
+
+        //to do still
+        //need to save the old email for the check if the user doesn't want to modify it
+
+        updateProfile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //currentUser = User.getInstance(null, null);
+
+                mydbh = new DatabaseHelper(getApplicationContext());
+
+                if (usernameValidation() && passValidation() && emailValidation()) {
+                    Boolean mailCheck = mydbh.checkEmail(email.getText().toString());
+                    if(mailCheck) {
+                        Boolean result = mydbh.update(currentUser);
+                        if (result) {
+                            Toast.makeText(getApplicationContext(), "Update successfull!", Toast.LENGTH_LONG).show();
+                        } else {
+                            Toast.makeText(getApplicationContext(), "Problem updating the profile!", Toast.LENGTH_LONG).show();
+                        }
+                        User.releaseInstance();
+                    }else{
+                        Toast.makeText(getApplicationContext(), "Email already registered!", Toast.LENGTH_LONG).show();
+                        User.releaseInstance();
+                    }
+                }
+
+            }
+        });
 
         signOut.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -58,82 +110,37 @@ public class ProfileActivity extends AppCompatActivity {
             }
         });
 
-        //here check if fields are empty, check the new email and enable the button if all ok
-        updateProfile.setEnabled(false);
-        /*if (usernameValidation() && emailValidation() && passValidation()) {
-            Boolean mailCheck = mydbh.checkEmail(email.getText().toString());
-            if (mailCheck) {
-                if (userModified()) {
-                    updateProfile.setEnabled(true);
-                }
-            } else {
-                Toast.makeText(getApplicationContext(), "Email already registered!", Toast.LENGTH_LONG).show();
-            }
-        }*/
+    }
 
-        updateProfile.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                currentUser = User.getInstance(null, null);
-                currentUser.setUsername(name.getText().toString());
-                currentUser.setEmail(email.getText().toString());
-                currentUser.setPassword(password.getText().toString());
-
-                mydbh = new DatabaseHelper(getApplicationContext());
-
-                Boolean result = mydbh.update(currentUser.getUsername(), currentUser.getEmail(), currentUser.getPassword(), passwordValue);
-                if (result) {
-                    Toast.makeText(getApplicationContext(), "Update successfull!", Toast.LENGTH_LONG).show();
-                } else {
-                    Toast.makeText(getApplicationContext(), "Problem updating the profile, check your password and try again!", Toast.LENGTH_LONG).show();
-                }
-                User.releaseInstance();
-            }
-        });
-
-        currentUser = User.getInstance(null, null);
-        mydbh = new DatabaseHelper(getApplicationContext());
-        if (mydbh.loadProfile(currentUser)) {
-            name.setText(currentUser.getUsername());
-            email.setText(currentUser.getEmail());
-            password.setText(currentUser.getPassword());
-        } else {
-            Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
-            User.releaseInstance();
-            startActivity(intent);
+    private TextWatcher profileModifiedWatcher = new TextWatcher() {
+        @Override
+        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
         }
 
-    }
+        @Override
+        public void onTextChanged(CharSequence s, int start, int before, int count) {
 
-    private boolean userModified() {
 
-        String usernameInput = name.getText().toString();
-        String emailInput = email.getText().toString();
-        String passwordInput = password.getText().toString();
-        String oldPasswordInput = oldPassword.getText().toString();
-
-        User user;
-        user = User.getInstance(null, null);
-
-        if ((!usernameInput.equals(user.getUsername()))
-                || (!emailInput.equals(user.getEmail()))
-                || (!passwordInput.equals(user.getPassword()))
-        ) {
-            if (oldPasswordInput.equals(user.getPassword())) {
-                user.setUsername(usernameInput);
-                user.setEmail(emailInput);
-                user.setPassword(passwordInput);
-            } else {
-                User.releaseInstance();
-                return false;
-            }
-        } else {
-            User.releaseInstance();
-            return false;
         }
-        return true;
-    }
+
+        @Override
+        public void afterTextChanged(Editable s) {
+
+            String usernameInput = name.getText().toString();
+            String emailInput = email.getText().toString();
+            String passwordInput = password.getText().toString();
+
+            currentUser = User.getInstance(null, null);
+
+            currentUser.setUsername(usernameInput);
+            currentUser.setEmail(emailInput);
+            currentUser.setPassword(passwordInput);
+
+            User.releaseInstance();
+            updateProfile.setEnabled(true);
+        }
+    };
 
     private boolean emailValidation() {
 
