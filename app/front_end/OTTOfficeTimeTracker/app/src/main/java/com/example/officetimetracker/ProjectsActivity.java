@@ -23,8 +23,7 @@ public class ProjectsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_projects);
 
-        projectsList = findViewById(R.id.tProjectList);
-        pName = findViewById(R.id.projectName);
+      /*  pName = findViewById(R.id.projectName);
         pDescription = findViewById(R.id.projectDescription);
         addProject = findViewById(R.id.btnAddProject);
 
@@ -45,7 +44,7 @@ public class ProjectsActivity extends AppCompatActivity {
                         + "\n");
             }
         }
-        projectsList.setText(stringBuilder);
+
 
         addProject.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -57,6 +56,6 @@ public class ProjectsActivity extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(), "Problem adding the new project!", Toast.LENGTH_LONG).show();
                 }
             }
-        });
+        });*/
     }
 }
