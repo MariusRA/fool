@@ -54,23 +54,22 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return true;
     }
 
-    public boolean update(User user) {
+    public boolean update(String username,String email,String password,int id) {
         SQLiteDatabase db = this.getWritableDatabase();
-        Cursor cursor = db.rawQuery("Select * from users where id=?"+ user.getId(), null);
-        if (cursor.getCount() == 1) {
-            ContentValues contentValues = new ContentValues();
-            contentValues.put("username", user.getUsername());
-            contentValues.put("email", user.getEmail());
-            contentValues.put("password", user.getPassword());
-            db.update("users", contentValues, "id=" + user.getId(), null);
+        ContentValues contentValues = new ContentValues();
+        contentValues.put("username", username);
+        contentValues.put("email", email);
+        contentValues.put("password", password);
+        int result = db.update("users", contentValues, "id=?", new String[]{String.valueOf(id)});
+        if (result == 1) {
             return true;
         }
         return false;
     }
 
-    public boolean checkEmail(String email) {
+    public boolean checkUniqueUser(String username, String email, int id) {
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor cursor = db.rawQuery("Select * from users where email=?", new String[]{email});
+        Cursor cursor = db.rawQuery("Select * from users where username=? and email=? and id!=?", new String[]{username, email, String.valueOf(id)});
         if (cursor.getCount() > 0) {
             return false;
         }
@@ -94,7 +93,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         }
         cursor.moveToFirst();
         user.setEmail(cursor.getString(cursor.getColumnIndex("email")));
-        user.setId(cursor.getString(cursor.getColumnIndex("id")));
+        user.setId(cursor.getInt(cursor.getColumnIndex("id")));
         return true;
     }
 
