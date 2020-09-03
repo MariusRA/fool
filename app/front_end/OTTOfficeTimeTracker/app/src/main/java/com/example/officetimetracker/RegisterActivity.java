@@ -47,7 +47,7 @@ public class RegisterActivity extends AppCompatActivity {
             public void onClick(View v) {
 
                 if (usernameValidation() && emailValidation() && passValidation()) {
-                    Boolean mailCheck = mydbh.checkEmail(email.getText().toString());
+                    Boolean mailCheck = mydbh.checkUniqueUser(username.getText().toString(),email.getText().toString(),-1);
                     if (mailCheck) {
                         boolean isInserted = mydbh.insert(username.getText().toString(), email.getText().toString(), pass.getText().toString());
                         if (isInserted) {
