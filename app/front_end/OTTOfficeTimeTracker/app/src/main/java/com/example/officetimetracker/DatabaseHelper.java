@@ -42,19 +42,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return true;
     }
 
-    public boolean insertProject(String name, String description) {
-        SQLiteDatabase db = this.getWritableDatabase();
-        ContentValues contentValues = new ContentValues();
-        contentValues.put("name", name);
-        contentValues.put("description", description);
-        long result = db.insert("projects", null, contentValues);
-        if (result == -1) {
-            return false;
-        }
-        return true;
-    }
-
-    public boolean update(String username,String email,String password,int id) {
+    public boolean update(String username, String email, String password, int id) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put("username", username);
@@ -97,10 +85,40 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return true;
     }
 
-    public Cursor dataView() {
+    public Cursor projectsView() {
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery("Select id,name,description from projects", null);
         return cursor;
     }
+
+    public boolean checkExistingProject(String projectName) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery("Select * from projects where name=?", new String[]{projectName});
+        if (cursor.getCount() > 0) {
+            return false;
+        }
+        return true;
+    }
+
+    public boolean insertProject(String name, String description) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put("name", name);
+        contentValues.put("description", description);
+        long result = db.insert("projects", null, contentValues);
+        if (result == -1) {
+            return false;
+        }
+        return true;
+    }
+
+    public boolean deleteProject(String projectName) {
+            SQLiteDatabase db = this.getWritableDatabase();
+            int result = db.delete("projects","name=?",new String[]{projectName});
+            if (result == 1) {
+                return true;
+            }
+            return false;
+        }
 
 }
