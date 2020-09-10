@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.database.Cursor;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -20,6 +21,7 @@ public class ProjectsActivity extends AppCompatActivity {
     TableRow row;
     Button addProject, deleteProject, editProject, seeProjectInfo;
     EditText projectName, projectDescription;
+    TextView id, name, description;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,36 +37,36 @@ public class ProjectsActivity extends AppCompatActivity {
         projectName = findViewById(R.id.etProjectName);
         projectDescription = findViewById(R.id.etProjectDescription);
 
-       /* addProject.setEnabled(false);
-        deleteProject.setEnabled(false);
-        editProject.setEnabled(false);
-        seeProjectInfo.setEnabled(false);
-
-
+        mydbh = new DatabaseHelper(getApplicationContext());
         Cursor cursor = mydbh.projectsView();
 
-       if(cursor.getCount()==0){
-           Toast.makeText(getApplicationContext(),"No data",Toast.LENGTH_SHORT).show();
-       }
-       else{
-           while(cursor.moveToNext()){
-               row=new TableRow(getApplicationContext());
-               TextView id=new TextView(getApplicationContext());
-               TextView name=new TextView(getApplicationContext());
-               TextView description=new TextView(getApplicationContext());
+        if (cursor.getCount() == 0) {
+            Toast.makeText(getApplicationContext(), "No data", Toast.LENGTH_SHORT).show();
+        } else {
+            while (cursor.moveToNext()) {
+                row = new TableRow(this);
+                id = new TextView(this);
+                name = new TextView(this);
+                description = new TextView(this);
 
-               id.setText(cursor.getInt(cursor.getColumnIndex("id")));
-               name.setText(cursor.getString(cursor.getColumnIndex("name")));
-               description.setText(cursor.getString(cursor.getColumnIndex("description")));
+                id.setGravity(Gravity.CENTER);
+                name.setGravity(Gravity.CENTER);
+                description.setGravity(Gravity.CENTER);
 
-               row.addView(id);
-               row.addView(name);
-               row.addView(description);
-               table.addView(row);
-           }
-       }*/
+                id.setTextSize(15);
+                name.setTextSize(15);
+                description.setTextSize(15);
 
-        mydbh = new DatabaseHelper(getApplicationContext());
+                id.setText(String.valueOf(cursor.getInt(cursor.getColumnIndex("id"))));
+                name.setText(cursor.getString(cursor.getColumnIndex("name")));
+                description.setText(cursor.getString(cursor.getColumnIndex("description")));
+
+                row.addView(id);
+                row.addView(name);
+                row.addView(description);
+                table.addView(row);
+            }
+        }
 
         addProject.setOnClickListener(new View.OnClickListener() {
             @Override
