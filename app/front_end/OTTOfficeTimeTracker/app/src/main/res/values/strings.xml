@@ -18,10 +18,14 @@
     <string name="newPassword">New Password</string>
     <string name="oldPassword">Introduce the old password to confirm</string>
     <string name="btnUpdateProfile">Update Profile</string>
+
     <string name="btnAddProject">Add Project</string>
-    <string name="btnEditProject">Edit</string>
+    <string name="btnUpdateProject">Update</string>
     <string name="btnDeleteProject">Delete</string>
-    <string name="btnSeeInfo">See Info</string>
+
+    <string name="tvManager">Manager</string>
+    <string name="tvProjectName">Project Name</string>
+    <string name="tvProjectDescription">Project Description</string>
 
     <string name="etPID">ID</string>
     <string name="etPName">Project Name</string>

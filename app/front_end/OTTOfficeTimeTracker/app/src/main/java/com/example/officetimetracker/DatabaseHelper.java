@@ -100,11 +100,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return true;
     }
 
-    public boolean insertProject(String name, String description) {
+    public boolean insertProject(String name, String description, String manager) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put("name", name);
         contentValues.put("description", description);
+        contentValues.put("managerId", manager);
         long result = db.insert("projects", null, contentValues);
         if (result == -1) {
             return false;
@@ -113,12 +114,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
     public boolean deleteProject(String projectName) {
-            SQLiteDatabase db = this.getWritableDatabase();
-            int result = db.delete("projects","name=?",new String[]{projectName});
-            if (result == 1) {
-                return true;
-            }
-            return false;
+        SQLiteDatabase db = this.getWritableDatabase();
+        int result = db.delete("projects", "name=?", new String[]{projectName});
+        if (result == 1) {
+            return true;
         }
+        return false;
+    }
 
 }

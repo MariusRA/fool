@@ -6,7 +6,6 @@ import android.database.Cursor;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TableLayout;
 import android.widget.TableRow;
@@ -18,10 +17,7 @@ public class ProjectsActivity extends AppCompatActivity {
 
     DatabaseHelper mydbh;
     TableLayout table;
-    TableRow row;
-    Button addProject, deleteProject, editProject, seeProjectInfo;
-    EditText projectName, projectDescription;
-    TextView id, name, description;
+    TextView hId, hName, hDescription;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,13 +25,9 @@ public class ProjectsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_projects);
 
         table = findViewById(R.id.tlProjects);
-        addProject = findViewById(R.id.btnAddProject);
-        deleteProject = findViewById(R.id.btnDeleteProject);
-        editProject = findViewById(R.id.btnEditProject);
-        seeProjectInfo = findViewById(R.id.btnSeeInfo);
-
-        projectName = findViewById(R.id.etProjectName);
-        projectDescription = findViewById(R.id.etProjectDescription);
+        hId = findViewById(R.id.etPID);
+        hName = findViewById(R.id.etPName);
+        hDescription = findViewById(R.id.etPDescription);
 
         mydbh = new DatabaseHelper(getApplicationContext());
         Cursor cursor = mydbh.projectsView();
@@ -44,18 +36,22 @@ public class ProjectsActivity extends AppCompatActivity {
             Toast.makeText(getApplicationContext(), "No data", Toast.LENGTH_SHORT).show();
         } else {
             while (cursor.moveToNext()) {
-                row = new TableRow(this);
+                TableRow row = new TableRow(this);
+                row.setClickable(true);
+
+                TextView id, name, description;
                 id = new TextView(this);
                 name = new TextView(this);
+
                 description = new TextView(this);
+
+                id.setLayoutParams(hId.getLayoutParams());
+                name.setLayoutParams(hName.getLayoutParams());
+                description.setLayoutParams(hDescription.getLayoutParams());
 
                 id.setGravity(Gravity.CENTER);
                 name.setGravity(Gravity.CENTER);
                 description.setGravity(Gravity.CENTER);
-
-                id.setTextSize(15);
-                name.setTextSize(15);
-                description.setTextSize(15);
 
                 id.setText(String.valueOf(cursor.getInt(cursor.getColumnIndex("id"))));
                 name.setText(cursor.getString(cursor.getColumnIndex("name")));
@@ -65,71 +61,44 @@ public class ProjectsActivity extends AppCompatActivity {
                 row.addView(name);
                 row.addView(description);
                 table.addView(row);
-            }
-        }
 
-        addProject.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                if (pNameNotEmpty() && pDescriptionNotEmpty()) {
-                    Boolean check = mydbh.checkExistingProject(projectName.getText().toString());
-                    if (check) {
-                        Boolean isInserted = mydbh.insertProject(projectName.getText().toString(), projectDescription.getText().toString());
-                        if (isInserted) {
-                            Toast.makeText(getApplicationContext(), "New project inserted!", Toast.LENGTH_LONG).show();
-                            projectName.setText("");
-                            projectDescription.setText("");
-                        } else {
-                            Toast.makeText(getApplicationContext(), "Problem inserting the project!", Toast.LENGTH_LONG).show();
-                        }
-                    } else {
-                        Toast.makeText(getApplicationContext(), "This project already exists!", Toast.LENGTH_LONG).show();
+                row.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        //here select the data from within the row
                     }
-                }
+                });
+
+                // id.setOnClickListener();
+                // id.getText();
+
+                //make text views clickable, and create onclick
+                //manager
+                //verify the manager id with the current user
+
+                //checkboxes
+
+                //function for adding a new row
+                //class for Project with fields name id description managerId projectManagerName
+                //in constructor: name and managerId
+
+                //edit button->update button
+                //delete see info button
+
+                //a new activity for editing a project, pass the id to intent
+                //if currentuser id != manager id -> disable all buttons and all checkboxes
+                //move the 2 editTexts to the new activity
+                //3 buttons: update,delete(active for existing projects),add
+                //projects in the tabe->clickable->take the text(project name)->move to the new activity
+                //make sure that the name is single word
+
+                //at the end of the table add a "+" button for adding a project->pass -1 as the id
+
             }
-        });
-
-        deleteProject.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (pNameNotEmpty()) {
-                    Boolean check = mydbh.checkExistingProject(projectName.getText().toString());
-                    if (check) {
-                        Boolean isDeleted = mydbh.deleteProject(projectName.getText().toString());
-                        if (isDeleted) {
-                            Toast.makeText(getApplicationContext(), "Project" + projectName.getText().toString() + "deleted!", Toast.LENGTH_LONG).show();
-                        } else {
-                            Toast.makeText(getApplicationContext(), "Problem deleting" + projectName.getText().toString() + "!", Toast.LENGTH_LONG).show();
-                        }
-                    } else {
-                        Toast.makeText(getApplicationContext(), "Project" + projectName.getText().toString() + "does not exist!", Toast.LENGTH_LONG).show();
-                    }
-                }
-            }
-        });
-
-    }
-
-    private boolean pNameNotEmpty() {
-
-        String pNameInput = projectName.getText().toString().trim();
-        if (pNameInput.isEmpty()) {
-            projectName.setError("Please fill out this field");
-            return false;
         }
-        projectName.setError(null);
-        return true;
+
+
+
     }
 
-    private boolean pDescriptionNotEmpty() {
-
-        String pDescriptionInput = projectDescription.getText().toString().trim();
-        if (pDescriptionInput.isEmpty()) {
-            projectDescription.setError("Please fill out this field");
-            return false;
-        }
-        projectDescription.setError(null);
-        return true;
-    }
 }
