@@ -13,6 +13,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
+            android:name=".EditProjectActivity"
+            android:parentActivityName=".ProjectsActivity"/>
+        <activity
             android:name=".ProjectsActivity"
             android:parentActivityName=".MainActivity" />
         <activity
