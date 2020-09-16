@@ -8,8 +8,8 @@
 
     <Button
         android:id="@+id/btnDeleteProject"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="160dp"
+        android:layout_height="0dp"
         android:layout_marginBottom="112dp"
         android:text="@string/btnDeleteProject"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -69,7 +69,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="100dp"
-        android:text="TextView"
+        android:text="@string/tvManager"
         app:layout_constraintEnd_toStartOf="@+id/tvManagerName"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -79,15 +79,15 @@
         android:id="@+id/tvManagerName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="208dp"
-        android:text="@string/tvManager"
+        android:layout_marginEnd="172dp"
+        android:text="Manager Name"
         app:layout_constraintBaseline_toBaselineOf="@+id/tvManager"
         app:layout_constraintEnd_toEndOf="parent" />
 
     <Button
         android:id="@+id/btnAddProject"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="160dp"
+        android:layout_height="0dp"
         android:layout_marginBottom="16dp"
         android:text="@string/btnAddProject"
         app:layout_constraintBottom_toTopOf="@+id/btnUpdateProject"
@@ -96,8 +96,8 @@
 
     <Button
         android:id="@+id/btnUpdateProject"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="160dp"
+        android:layout_height="0dp"
         android:layout_marginBottom="16dp"
         android:text="@string/btnUpdateProject"
         app:layout_constraintBottom_toTopOf="@+id/btnDeleteProject"

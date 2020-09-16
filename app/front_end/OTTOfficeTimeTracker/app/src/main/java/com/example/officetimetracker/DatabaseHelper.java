@@ -122,4 +122,17 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return false;
     }
 
+    public boolean loadProject(Project project) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery("Select * from projects where id=?", new String[]{String.valueOf(project.getId())});
+        if (cursor.getCount() < 1) {
+            return false;
+        }
+        cursor.moveToFirst();
+        project.setName(cursor.getString(cursor.getColumnIndex("name")));
+        project.setDescription(cursor.getString(cursor.getColumnIndex("description")));
+        project.setManagerId(cursor.getInt(cursor.getColumnIndex("managerId")));
+        return true;
+    }
+
 }
