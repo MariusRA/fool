@@ -8,10 +8,8 @@ public class Project {
     private int managerId;
     private String projectManagerName;
 
-    Project(String name, int managerID) {
-        this.name = name;
-        this.managerId = managerID;
-
+    Project(String id) {
+        this.id=Integer.parseInt(id);
     }
 
     public int getId() {
