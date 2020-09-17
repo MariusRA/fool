@@ -100,12 +100,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return true;
     }
 
-    public boolean insertProject(String name, String description, String manager) {
+    public boolean insertProject(Project project) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
-        contentValues.put("name", name);
-        contentValues.put("description", description);
-        contentValues.put("managerId", manager);
+        contentValues.put("name", project.getName());
+        contentValues.put("description", project.getDescription());
+        contentValues.put("managerId", project.getManagerId());
         long result = db.insert("projects", null, contentValues);
         if (result == -1) {
             return false;

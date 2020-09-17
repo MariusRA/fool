@@ -9,7 +9,13 @@ public class Project {
     private String projectManagerName;
 
     Project(String id) {
-        this.id=Integer.parseInt(id);
+        this.id = Integer.parseInt(id);
+    }
+
+    Project(String name, String description, String managerID) {
+        this.name = name;
+        this.description = description;
+        this.managerId = Integer.parseInt(managerID);
     }
 
     public int getId() {
