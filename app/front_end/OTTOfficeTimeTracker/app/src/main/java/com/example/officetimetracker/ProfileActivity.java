@@ -91,11 +91,11 @@ public class ProfileActivity extends AppCompatActivity {
         updateProfile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Boolean uniqueUser = mydbh.checkUniqueUser(name.getText().toString(), email.getText().toString(), currentUser.getId());
+                boolean uniqueUser = mydbh.checkUniqueUser(name.getText().toString(), email.getText().toString(), currentUser.getId());
                 if (uniqueUser) {
                     String oldPass = currentUser.getPassword();
                     if (oldPass.equals(oldPassword.getText().toString())) {
-                        Boolean result = mydbh.update(name.getText().toString(), email.getText().toString(), password.getText().toString(), currentUser.getId());
+                        boolean result = mydbh.updateUser(name.getText().toString(), email.getText().toString(), password.getText().toString(), currentUser.getId());
                         if (result) {
                             Toast.makeText(getApplicationContext(), "Update successfull!", Toast.LENGTH_LONG).show();
                             updateProfile.setEnabled(false);

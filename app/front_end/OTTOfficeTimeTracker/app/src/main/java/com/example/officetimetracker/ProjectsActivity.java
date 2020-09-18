@@ -72,7 +72,6 @@ public class ProjectsActivity extends AppCompatActivity {
                         TextView pID = (TextView) tablerow.getChildAt(0);
                         String currentID = pID.getText().toString();
 
-                        Toast.makeText(getApplicationContext(), currentID, Toast.LENGTH_LONG).show();
                         Intent intent = new Intent(getApplicationContext(), EditProjectActivity.class);
                         intent.putExtra("clicked", currentID);
                         startActivity(intent);
@@ -94,7 +93,6 @@ public class ProjectsActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), EditProjectActivity.class);
-                Toast.makeText(getApplicationContext(), "Add project clicked", Toast.LENGTH_LONG).show();
                 intent.putExtra("clicked", String.valueOf(-1));
                 startActivity(intent);
             }
@@ -104,24 +102,3 @@ public class ProjectsActivity extends AppCompatActivity {
     }
 
 }
-//make text views clickable, and create onclick
-//manager
-//verify the manager id with the current user
-
-//checkboxes
-
-//function for adding a new row
-//class for Project with fields name id description managerId projectManagerName
-//in constructor: name and managerId
-
-//edit button->update button
-//delete see info button
-
-//a new activity for editing a project, pass the id to intent
-//if currentuser id != manager id -> disable all buttons and all checkboxes
-//move the 2 editTexts to the new activity
-//3 buttons: update,delete(active for existing projects),add
-//projects in the tabe->clickable->take the text(project name)->move to the new activity
-//make sure that the name is single word
-
-//at the end of the table add a "+" button for adding a project->pass -1 as the id

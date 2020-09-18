@@ -49,7 +49,7 @@ public class RegisterActivity extends AppCompatActivity {
                 if (usernameValidation() && emailValidation() && passValidation()) {
                     Boolean mailCheck = mydbh.checkUniqueUser(username.getText().toString(),email.getText().toString(),-1);
                     if (mailCheck) {
-                        boolean isInserted = mydbh.insert(username.getText().toString(), email.getText().toString(), pass.getText().toString());
+                        boolean isInserted = mydbh.insertUser(username.getText().toString(), email.getText().toString(), pass.getText().toString());
                         if (isInserted) {
                             Toast.makeText(getApplicationContext(), "User Registered!", Toast.LENGTH_LONG).show();
                             Intent intent = new Intent(getApplicationContext(), LoginActivity.class);

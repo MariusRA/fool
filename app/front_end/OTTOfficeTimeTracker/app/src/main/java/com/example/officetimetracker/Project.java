@@ -12,10 +12,9 @@ public class Project {
         this.id = Integer.parseInt(id);
     }
 
-    Project(String name, String description, String managerID) {
+    Project(String name, String description) {
         this.name = name;
         this.description = description;
-        this.managerId = Integer.parseInt(managerID);
     }
 
     public int getId() {

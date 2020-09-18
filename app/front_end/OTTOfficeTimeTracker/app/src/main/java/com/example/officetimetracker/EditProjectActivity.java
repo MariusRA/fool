@@ -18,6 +18,7 @@ public class EditProjectActivity extends AppCompatActivity {
     TextView managerName;
     DatabaseHelper mydbh;
     User user;
+    Project project, prj;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,13 +34,14 @@ public class EditProjectActivity extends AppCompatActivity {
 
         mydbh = new DatabaseHelper(getApplicationContext());
         user = User.getInstance(null, null);
+        mydbh.loadProfile(user);
 
         String receivedID = getIntent().getExtras().getString("clicked");
 
         assert receivedID != null;
         if (Integer.parseInt(receivedID) != -1) {
 
-            Project project = new Project(receivedID);
+            project = new Project(receivedID);
 
             if (mydbh.loadProject(project)) {
                 projectName.setText(project.getName());
@@ -49,6 +51,10 @@ public class EditProjectActivity extends AppCompatActivity {
             updateProject.setEnabled(true);
             deleteProject.setEnabled(true);
             addProject.setEnabled(false);
+            if (user.getId() != project.getManagerId()) {
+                updateProject.setEnabled(false);
+                deleteProject.setEnabled(false);
+            }
         } else {
             if (Integer.parseInt(receivedID) == -1) {
 
@@ -89,7 +95,19 @@ public class EditProjectActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-
+                boolean projectNotAlreadyExists = mydbh.checkExistingProject(projectName.getText().toString().trim());
+                if (projectNotAlreadyExists) {
+                    prj = new Project(projectName.getText().toString().trim(), projectDescription.getText().toString());
+                    prj.setManagerId(user.getId());
+                    boolean isInserted = mydbh.insertProject(prj);
+                    if (isInserted) {
+                        Toast.makeText(getApplicationContext(), "New project added!", Toast.LENGTH_LONG).show();
+                    } else {
+                        Toast.makeText(getApplicationContext(), "Problem adding the new project!", Toast.LENGTH_LONG).show();
+                    }
+                } else {
+                    Toast.makeText(getApplicationContext(), "A project with this name already exists!", Toast.LENGTH_LONG).show();
+                }
 
             }
         });
@@ -98,12 +116,32 @@ public class EditProjectActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
+                boolean projectNotAlreadyExists = mydbh.checkExistingProject(projectName.getText().toString().trim());
+                if (projectNotAlreadyExists) {
+                    Project p = new Project(projectName.getText().toString().trim(), projectDescription.getText().toString());
+                    p.setManagerId(project.getManagerId());
+                    boolean upProject = mydbh.updateProject(p, String.valueOf(project.getId()));
+                    if (upProject) {
+                        Toast.makeText(getApplicationContext(), "Project updated!", Toast.LENGTH_LONG).show();
+                    } else {
+                        Toast.makeText(getApplicationContext(), "Project updated!", Toast.LENGTH_LONG).show();
+                    }
+                } else {
+                    Toast.makeText(getApplicationContext(), "This project already exists!", Toast.LENGTH_LONG).show();
+                }
             }
         });
 
         deleteProject.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                boolean isDeleted = mydbh.deleteProject(project);
+                if (isDeleted) {
+                    Toast.makeText(getApplicationContext(), "Project successfully deleted!", Toast.LENGTH_LONG).show();
+                } else {
+                    Toast.makeText(getApplicationContext(), "Problem deleting the project!", Toast.LENGTH_LONG).show();
+                }
 
             }
         });
