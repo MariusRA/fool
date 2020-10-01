@@ -147,4 +147,14 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         }
         return false;
     }
+
+    public String projectManager(int id){
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery("Select * from users where id=?", new String[]{String.valueOf(id)});
+        if (cursor.getCount() < 1) {
+            return "Error!";
+        }
+        cursor.moveToFirst();
+        return cursor.getString(cursor.getColumnIndex("username"));
+    }
 }
