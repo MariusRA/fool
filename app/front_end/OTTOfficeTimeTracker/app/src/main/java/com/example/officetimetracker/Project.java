@@ -6,7 +6,6 @@ public class Project {
     private String name;
     private String description;
     private int managerId;
-    private String projectManagerName;
 
     Project(String id) {
         this.id = Integer.parseInt(id);

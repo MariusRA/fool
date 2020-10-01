@@ -46,7 +46,7 @@ public class EditProjectActivity extends AppCompatActivity {
             if (mydbh.loadProject(project)) {
                 projectName.setText(project.getName());
                 projectDescription.setText(project.getDescription());
-                managerName.setText(String.valueOf(project.getManagerId()));
+                managerName.setText(mydbh.projectManager(project.getManagerId()));
             }
             updateProject.setEnabled(true);
             deleteProject.setEnabled(true);
